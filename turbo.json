@@ -50,5 +50,12 @@
       "inputs": ["$TURBO_DEFAULT$", ".env*"]
     }
   },
-  "globalEnv": ["AUTH_BASE_URL", "AUTH_SECRET", "AUTH_DATABASE_URL"]
+  "globalEnv": [
+    "AUTH_BASE_URL",
+    "AUTH_SECRET",
+    "AUTH_DATABASE_URL",
+    "GOOGLE_CLIENT_ID",
+    "GOOGLE_CLIENT_SECRET",
+    "GOOGLE_REFRESH_TOKEN"
+  ]
 }

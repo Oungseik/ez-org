@@ -13,9 +13,42 @@ const db = drizzle(process.env.AUTH_DATABASE_URL!, {
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, { provider: "sqlite" }),
-  experimental: { joins: true },
   secret: process.env.AUTH_SECRET,
 
-  emailAndPassword: { enabled: true, requireEmailVerification: true },
-  plugins: [jwt(), organizationPlugin(), openAPI()],
+  emailAndPassword: {
+    enabled: true,
+    requireEmailVerification: true,
+    autoSignIn: false,
+  },
+
+  emailVerification: {
+    sendOnSignUp: true,
+    sendVerificationEmail: async ({ user, url }) => {},
+  },
+
+  experimental: { joins: true },
+  session: {
+    cookieCache: {
+      enabled: true,
+      maxAge: 5 ^ 60,
+    },
+  },
+
+  socialProviders: {
+    google: {
+      prompt: "select_account",
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    },
+  },
+
+  plugins: [
+    jwt(),
+    organizationPlugin({
+      allowUserToCreateOrganization: (user) => {
+        return true;
+      },
+    }),
+    openAPI(),
+  ],
 });
