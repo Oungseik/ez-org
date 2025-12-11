@@ -18,6 +18,7 @@
         devShell = pkgs.mkShell {
           buildInputs = with pkgs; [
             biome
+            turso
 
             cargo-audit
             cargo-nextest

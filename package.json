@@ -2,10 +2,7 @@
   "$schema": "https://json.schemastore.org/package.json",
   "name": "svelte_kit_starter",
   "private": true,
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
+  "workspaces": ["apps/*", "packages/*"],
   "scripts": {
     "check": "turbo $@ check",
     "dev": "turbo $@ dev",
@@ -16,6 +13,8 @@
     "test": "turbo $@ test",
     "shadcn-extras": "pnpm dlx jsrepo add --cwd packages/ui",
     "shadcn": "pnpm dlx shadcn-svelte@latest add -c packages/ui",
+    "better-auth:generate": "turbo better-auth:generate",
+    "better-auth:migrate": "turbo better-auth:migrate",
     "db:push": "turbo db:push",
     "db:studio": "turbo db:studio",
     "db:generate": "turbo db:generate",
@@ -27,9 +26,6 @@
   },
   "packageManager": "pnpm@10.18.0",
   "pnpm": {
-    "onlyBuiltDependencies": [
-      "@tailwindcss/oxide",
-      "esbuild"
-    ]
+    "onlyBuiltDependencies": ["@tailwindcss/oxide", "esbuild"]
   }
 }
