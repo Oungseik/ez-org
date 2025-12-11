@@ -1,6 +1,6 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { jwt, organization as organizationPlugin } from "better-auth/plugins";
+import { jwt, openAPI, organization as organizationPlugin } from "better-auth/plugins";
 import { drizzle } from "drizzle-orm/tursodatabase/database";
 import { account, session, user, verification } from "./schema/core";
 import { invitation, member, organization } from "./schema/organization";
@@ -14,7 +14,8 @@ const db = drizzle(process.env.AUTH_DATABASE_URL!, {
 export const auth = betterAuth({
   database: drizzleAdapter(db, { provider: "sqlite" }),
   experimental: { joins: true },
+  secret: process.env.AUTH_SECRET,
 
   emailAndPassword: { enabled: true, requireEmailVerification: true },
-  plugins: [jwt(), organizationPlugin()],
+  plugins: [jwt(), organizationPlugin(), openAPI()],
 });
